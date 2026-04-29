@@ -42,6 +42,7 @@ export function ProverbsCard({ state, setState, agent }: ProverbsCardProps) {
                 </div>
               ) : (
                 <button
+                  disabled={agent?.isRunning}
                   onClick={() => {
                     //
                     //
