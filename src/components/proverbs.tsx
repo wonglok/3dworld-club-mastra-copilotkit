@@ -27,10 +27,13 @@ export function ProverbsCard({ state, setState, agent }: ProverbsCardProps) {
               <p className="pr-8">{proverb}</p>
               <button
                 onClick={() => {
+                  //
+
                   // setState({
                   //   ...state,
                   //   proverbs: state.proverbs?.filter((_, i) => i !== index),
                   // });
+
                   agent?.addMessage({
                     id: `_${Math.random().toString(36).slice(2, 9)}`,
                     role: "user",
