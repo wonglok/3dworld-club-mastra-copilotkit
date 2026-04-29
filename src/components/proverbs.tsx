@@ -29,17 +29,18 @@ export function ProverbsCard({ state, setState, agent }: ProverbsCardProps) {
                 onClick={() => {
                   //
 
-                  // setState({
-                  //   ...state,
-                  //   proverbs: state.proverbs?.filter((_, i) => i !== index),
-                  // });
-
+                  //
                   agent?.addMessage({
                     id: `_${Math.random().toString(36).slice(2, 9)}`,
                     role: "user",
                     content: `remove this proverb: ${proverb}`,
                   });
-                  agent?.runAgent();
+                  agent?.runAgent().then(() => {
+                    setState({
+                      ...state,
+                      proverbs: state.proverbs?.filter((_, i) => i !== index),
+                    });
+                  });
                 }}
                 className="absolute right-3 top-3 opacity-0 group-hover:opacity-100 transition-opacity 
                 bg-red-500 hover:bg-red-600 text-white rounded-full h-6 w-6 flex items-center justify-center"
