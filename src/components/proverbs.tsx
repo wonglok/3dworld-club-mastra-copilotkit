@@ -65,7 +65,7 @@ export function ProverbsCard({ state, setState, agent }: ProverbsCardProps) {
                 disabled:bg-gray-800 disabled:text-white
                 bg-red-500 hover:bg-red-600 text-white rounded-full h-6 w-6 flex items-center justify-center"
               >
-                ✕
+                {agent?.isRunning ? `o` : `✕`}
               </button>
             </div>
           ))}
