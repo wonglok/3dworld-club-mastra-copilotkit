@@ -1,0 +1,72 @@
+// import { openai } from "@ai-sdk/openai";
+import { Agent } from "@mastra/core/agent";
+import { weatherTool } from "@/mastra/tools";
+import { LibSQLStore } from "@mastra/libsql";
+import { z } from "zod";
+import { Memory } from "@mastra/memory";
+import { createOpenAICompatible } from "@ai-sdk/openai-compatible";
+import { createDeepSeek } from "@ai-sdk/deepseek";
+import { agentStorage } from "../storage";
+
+const deepseekProvider = createDeepSeek({
+  apiKey: process.env.DEEPSEEK_API_KEY ?? "",
+});
+
+let deepSeekChatModel = deepseekProvider.languageModel("deepseek-chat");
+
+let lmStudioModel = createOpenAICompatible({
+  baseURL: "http://localhost:1234/v1",
+  name: "lmstudio",
+  headers: {
+    Authorization: `Bearer ${process.env.MY_API_KEY}`,
+  },
+}).languageModel("google/gemma-4-e2b", {
+  supportsStructuredOutputs: true,
+  provider: "openai",
+});
+
+export const AgentState = z.object({
+  proverbs: z.array(z.string()).default([]),
+
+  //
+  recepie: z
+    .object({
+      ingredients: z.array(
+        z.object({
+          name: z.string(),
+          emoji: z.string(),
+        }),
+      ),
+      instructions: z.array(z.object({ step: z.string() })),
+    })
+    .optional(),
+});
+
+export type AgentStateType = z.infer<typeof AgentState>;
+
+export const myAgentCopilot = new Agent({
+  id: "myAgentCopilot",
+  name: "myAgentCopilot",
+  tools: { weatherTool },
+  model: deepSeekChatModel,
+  instructions: "You are a helpful assistant.",
+  memory: new Memory({
+    storage: new LibSQLStore({
+      id: "weather-agent-memory",
+      url: "file::memory:",
+    }),
+    options: {
+      workingMemory: {
+        enabled: true,
+        schema: AgentState,
+        scope: "thread",
+      },
+    },
+  }),
+});
+
+//
+
+//
+
+//
