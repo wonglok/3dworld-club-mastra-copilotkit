@@ -45,7 +45,7 @@ export function ProverbsCard({ state, setState, agent }: ProverbsCardProps) {
                     agent?.addMessage({
                       id: `_${Math.random().toString(36).slice(2, 9)}`,
                       role: "user",
-                      content: `Please Remove Proverb: ${proverb}`,
+                      content: `Please Remove Proverb [${index}]: ${proverb}`,
                     });
                     //
                     //
@@ -63,9 +63,9 @@ export function ProverbsCard({ state, setState, agent }: ProverbsCardProps) {
                 }}
                 className=" opacity-0 group-hover:opacity-100 transition-opacity 
                 disabled:bg-gray-800 disabled:text-white
-                bg-red-500 hover:bg-red-600 text-white rounded-full h-6 w-6 flex items-center justify-center"
+                bg-red-500 hover:bg-red-600 text-white rounded-full h-6 shrink-0 px-2 flex items-center justify-center text-xs"
               >
-                {agent?.isRunning ? `o` : `✕`}
+                {agent?.isRunning ? <>{`Processing...`}</> : `✕`}
               </button>
             </div>
           ))}
