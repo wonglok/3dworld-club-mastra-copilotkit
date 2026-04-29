@@ -1,7 +1,8 @@
 import { AgentStateType } from "@/mastra/agents";
 import { AbstractAgent } from "@ag-ui/client";
-import { useCopilotChat } from "@copilotkit/react-core";
-import { useCopilotKit } from "@copilotkit/react-core/v2";
+// import { useCopilotChat } from "@copilotkit/react-core";
+// import { useCopilotKit } from "@copilotkit/react-core/v2";
+import { useChatContext } from "@copilotkit/react-ui";
 
 export interface ProverbsCardProps {
   state: AgentStateType;
@@ -10,7 +11,8 @@ export interface ProverbsCardProps {
 }
 
 export function ProverbsCard({ state, setState, agent }: ProverbsCardProps) {
-  // const chat = useCopilotChat();
+  const chat = useChatContext();
+
   return (
     <div className="bg-white/20 backdrop-blur-md p-8 rounded-2xl shadow-xl max-w-2xl w-full">
       <h1 className="text-4xl font-bold text-white mb-2 text-center">
@@ -20,8 +22,17 @@ export function ProverbsCard({ state, setState, agent }: ProverbsCardProps) {
         This is a demonstrative page, but it could be anything you want! 🪁
       </p>
       <hr className="border-white/20 my-6" />
-      <div className="flex flex-col gap-3">
+      <div className="flex flex-col gap-3 relative">
         <div className="h-[400px] overflow-scroll">
+          <>
+            {agent?.isRunning ? (
+              <div className="flex justify-center items-center absolute top-0 right-0">
+                <div className="p-2 m-2 text-center inline-block mx-auto text-black bg-gray-100 rounded-2xl shadow">{`Loading...`}</div>
+              </div>
+            ) : (
+              ``
+            )}
+          </>
           {state?.proverbs?.map((proverb, index) => (
             <div
               key={index + proverb}
@@ -32,6 +43,9 @@ export function ProverbsCard({ state, setState, agent }: ProverbsCardProps) {
                 onClick={() => {
                   //
                   //
+
+                  chat.setOpen(true);
+
                   agent?.addMessage({
                     id: `_${Math.random().toString(36).slice(2, 9)}`,
                     role: "user",

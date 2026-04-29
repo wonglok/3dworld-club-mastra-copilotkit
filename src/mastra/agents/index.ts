@@ -48,7 +48,8 @@ export const myAgentCopilot = new Agent({
   id: "myAgentCopilot",
   name: "myAgentCopilot",
   tools: { weatherTool },
-  model: deepSeekChatModel,
+  model:
+    process.env.NODE_ENV === "development" ? lmStudioModel : deepSeekChatModel,
   instructions: "You are a helpful assistant.",
   memory: new Memory({
     storage: new LibSQLStore({
