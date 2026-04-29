@@ -1,5 +1,7 @@
 import { AgentStateType } from "@/mastra/agents";
 import { AbstractAgent } from "@ag-ui/client";
+import { useCopilotChat } from "@copilotkit/react-core";
+import { useCopilotKit } from "@copilotkit/react-core/v2";
 
 export interface ProverbsCardProps {
   state: AgentStateType;
@@ -8,6 +10,7 @@ export interface ProverbsCardProps {
 }
 
 export function ProverbsCard({ state, setState, agent }: ProverbsCardProps) {
+  // const chat = useCopilotChat();
   return (
     <div className="bg-white/20 backdrop-blur-md p-8 rounded-2xl shadow-xl max-w-2xl w-full">
       <h1 className="text-4xl font-bold text-white mb-2 text-center">
@@ -28,7 +31,6 @@ export function ProverbsCard({ state, setState, agent }: ProverbsCardProps) {
               <button
                 onClick={() => {
                   //
-
                   //
                   agent?.addMessage({
                     id: `_${Math.random().toString(36).slice(2, 9)}`,
