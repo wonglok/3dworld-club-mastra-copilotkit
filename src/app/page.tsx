@@ -35,6 +35,7 @@ export default function CopilotKitPage() {
       }
     >
       <CopilotSidebar
+        defaultOpen
         disableSystemMessage={true}
         clickOutsideToClose={false}
         labels={{
