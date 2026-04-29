@@ -42,19 +42,27 @@ export function ProverbsCard({ state, setState, agent }: ProverbsCardProps) {
 
                   //
                   setTimeout(() => {
-                    agent?.addMessage({
-                      id: `_${Math.random().toString(36).slice(2, 9)}`,
-                      role: "user",
-                      content: `Please Remove Proverb [${index}]: ${proverb}`,
-                    });
+                    //
+                    // agent?.addMessage({
+                    //   id: `_${Math.random().toString(36).slice(2, 9)}`,
+                    //   role: "user",
+                    //   content: `Please Remove Proverb [${index}]: ${proverb}`,
+                    // });
+                    //
+
                     //
                     //
-                    agent?.runAgent({}).then(() => {
-                      // setState({
-                      //   ...state,
-                      //   proverbs: state.proverbs?.filter((_, i) => i !== index),
-                      // });
-                    });
+                    //
+
+                    let newState = {
+                      ...state,
+                      proverbs: state.proverbs?.filter((_, i) => i !== index),
+                    };
+
+                    // setState(newState);
+                    agent?.setState(newState);
+                    //
+                    agent?.runAgent({}).then(() => {});
                     //
                     //
                   }, 10);

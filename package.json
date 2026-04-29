@@ -21,7 +21,7 @@
     "@copilotkit/runtime": "1.55.2",
     "@libsql/client": "^0.15.15",
     "@mastra/client-js": "beta",
-    "@mastra/core": "beta",
+    "@mastra/core": "^1.29.0",
     "@mastra/libsql": "beta",
     "@mastra/memory": "beta",
     "@mastra/mongodb": "^1.7.3",

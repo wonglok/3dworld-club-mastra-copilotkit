@@ -38,6 +38,11 @@ export default function CopilotKitPage() {
         defaultOpen
         disableSystemMessage={true}
         clickOutsideToClose={false}
+        onSubmitMessage={(message) => {
+          //
+          console.log(message);
+          //
+        }}
         labels={{
           title: "Popup Assistant",
           initial: "👋 Hi, there! You're chatting with an agent.",

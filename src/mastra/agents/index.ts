@@ -6,6 +6,7 @@ import { z } from "zod";
 import { Memory } from "@mastra/memory";
 import { createOpenAICompatible } from "@ai-sdk/openai-compatible";
 import { createDeepSeek } from "@ai-sdk/deepseek";
+import { agentStorage } from "../storage";
 // import { agentStorage } from "../storage";
 
 const deepseekProvider = createDeepSeek({
@@ -52,10 +53,11 @@ export const myAgentCopilot = new Agent({
     process.env.NODE_ENV === "development" ? lmStudioModel : deepSeekChatModel,
   instructions: "You are a helpful assistant.",
   memory: new Memory({
-    storage: new LibSQLStore({
-      id: "weather-agent-memory",
-      url: "file::memory:",
-    }),
+    // storage: new LibSQLStore({
+    //   id: "weather-agent-memory",
+    //   url: "file::memory:",
+    // }),
+    storage: agentStorage as any,
     options: {
       workingMemory: {
         enabled: true,
@@ -63,7 +65,7 @@ export const myAgentCopilot = new Agent({
         scope: "thread",
       },
     },
-  }),
+  }) as any,
 });
 
 //
