@@ -3,6 +3,7 @@ import { AbstractAgent } from "@ag-ui/client";
 // import { useCopilotChat } from "@copilotkit/react-core";
 // import { useCopilotKit } from "@copilotkit/react-core/v2";
 import { useChatContext } from "@copilotkit/react-ui";
+import { useState } from "react";
 
 export interface ProverbsCardProps {
   state: AgentStateType;
@@ -13,6 +14,7 @@ export interface ProverbsCardProps {
 export function ProverbsCard({ state, setState, agent }: ProverbsCardProps) {
   const chat = useChatContext();
 
+  const [clicked, setClicked] = useState("");
   return (
     <div className="bg-white/20 backdrop-blur-md p-8 rounded-2xl shadow-xl max-w-2xl w-full">
       <h1 className="text-4xl font-bold text-white mb-2 text-center">
@@ -24,45 +26,47 @@ export function ProverbsCard({ state, setState, agent }: ProverbsCardProps) {
       <hr className="border-white/20 my-6" />
       <div className="flex flex-col gap-3 relative">
         <div className="h-[400px] overflow-scroll">
-          <>
-            {agent?.isRunning ? (
-              <div className="flex justify-center items-center absolute top-0 right-0">
-                <div className="p-2 m-2 text-center inline-block mx-auto text-black bg-gray-100 rounded-2xl shadow">{`Loading...`}</div>
-              </div>
-            ) : (
-              ``
-            )}
-          </>
+          <></>
           {state?.proverbs?.map((proverb, index) => (
             <div
               key={index + proverb}
-              className="bg-white/15 p-4 rounded-xl text-white relative group hover:bg-white/20 transition-all mb-3"
+              className="bg-white/15 p-4 rounded-xl text-white relative group hover:bg-white/20 transition-all mb-3 flex justify-between items-center"
             >
               <p className="pr-8">{proverb}</p>
-              <button
-                onClick={() => {
-                  //
-                  //
 
-                  chat.setOpen(true);
+              {agent?.isRunning && clicked === proverb ? (
+                <div className="flex justify-center items-center">
+                  <div className="p-2 text-center block mx-auto text-black bg-white rounded-2xl shadow px-5">
+                    {`Processing...`}
+                  </div>
+                </div>
+              ) : (
+                <button
+                  onClick={() => {
+                    //
+                    //
+                    setClicked(proverb);
 
-                  agent?.addMessage({
-                    id: `_${Math.random().toString(36).slice(2, 9)}`,
-                    role: "user",
-                    content: `remove this proverb: ${proverb}`,
-                  });
-                  agent?.runAgent().then(() => {
-                    setState({
-                      ...state,
-                      proverbs: state.proverbs?.filter((_, i) => i !== index),
+                    chat.setOpen(true);
+
+                    agent?.addMessage({
+                      id: `_${Math.random().toString(36).slice(2, 9)}`,
+                      role: "user",
+                      content: `remove this proverb: ${proverb}`,
                     });
-                  });
-                }}
-                className="absolute right-3 top-3 opacity-0 group-hover:opacity-100 transition-opacity 
+                    agent?.runAgent().then(() => {
+                      setState({
+                        ...state,
+                        proverbs: state.proverbs?.filter((_, i) => i !== index),
+                      });
+                    });
+                  }}
+                  className=" opacity-0 group-hover:opacity-100 transition-opacity 
                 bg-red-500 hover:bg-red-600 text-white rounded-full h-6 w-6 flex items-center justify-center"
-              >
-                ✕
-              </button>
+                >
+                  ✕
+                </button>
+              )}
             </div>
           ))}
         </div>
