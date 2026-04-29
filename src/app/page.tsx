@@ -7,6 +7,7 @@ import { useCoAgent, useCopilotAction } from "@copilotkit/react-core";
 import { CopilotKitCSSProperties, CopilotSidebar } from "@copilotkit/react-ui";
 import { useState } from "react";
 import { AgentStateType } from "@/mastra/agents";
+import { useAgent } from "@copilotkit/react-core/v2";
 
 export default function CopilotKitPage() {
   const [themeColor, setThemeColor] = useState("#6366f1");
@@ -83,7 +84,7 @@ export default function CopilotKitPage() {
 
 function YourMainContent({ themeColor }: { themeColor: string }) {
   // 🪁 Shared State: https://docs.copilotkit.ai/mastra/shared-state/in-app-agent-read
-  const { state, setState } = useCoAgent<AgentStateType>({
+  const { state, setState, name } = useCoAgent<AgentStateType>({
     name: "myAgentCopilot",
     initialState: {
       proverbs: [
@@ -92,6 +93,7 @@ function YourMainContent({ themeColor }: { themeColor: string }) {
       ],
     },
   });
+  const { agent } = useAgent({ agentId: name });
 
   //🪁 Generative UI: https://docs.copilotkit.ai/mastra/generative-ui/tool-based
   useCopilotAction(
@@ -138,7 +140,7 @@ function YourMainContent({ themeColor }: { themeColor: string }) {
       style={{ backgroundColor: themeColor }}
       className="h-screen flex justify-center items-center flex-col transition-colors duration-300"
     >
-      <ProverbsCard state={state} setState={setState} />
+      <ProverbsCard state={state} setState={setState} agent={agent} />
     </div>
   );
 }

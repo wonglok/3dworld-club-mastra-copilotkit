@@ -6,7 +6,7 @@ import { z } from "zod";
 import { Memory } from "@mastra/memory";
 import { createOpenAICompatible } from "@ai-sdk/openai-compatible";
 import { createDeepSeek } from "@ai-sdk/deepseek";
-import { agentStorage } from "../storage";
+// import { agentStorage } from "../storage";
 
 const deepseekProvider = createDeepSeek({
   apiKey: process.env.DEEPSEEK_API_KEY ?? "",
