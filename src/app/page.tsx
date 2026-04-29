@@ -126,8 +126,6 @@ function YourMainContent({ themeColor }: { themeColor: string }) {
     [themeColor],
   );
 
-  //
-
   // 🪁 Human In the Loop: https://docs.copilotkit.ai/mastra/human-in-the-loop
   useCopilotAction(
     {
