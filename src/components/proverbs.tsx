@@ -93,6 +93,11 @@ export function ProverbsCard({ state, setState, agent }: ProverbsCardProps) {
           )}
         </div>
       </div>
+      <pre className="bg-white p-2 rounded-lg text-xs">
+        {JSON.stringify(agent?.state, null, "\t")}
+      </pre>
     </div>
   );
 }
+
+//
