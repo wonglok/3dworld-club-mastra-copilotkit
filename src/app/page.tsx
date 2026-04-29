@@ -61,16 +61,16 @@ export default function CopilotKitPage() {
             message: "Please go to the moon.",
           },
           {
-            title: "Add Agent State",
+            title: "Add 10 proverbs",
             message: "add 10 proverbs in the bible into the list.",
           },
           {
-            title: "Remove 5 items in Agent State",
+            title: "Remove 5 random proverbs",
             message:
               "Please remove 5 random proverb from the list if there are any.",
           },
           {
-            title: "Read Agent State",
+            title: "List out the existing proverbs",
             message: "What are the proverbs?",
           },
         ]}
@@ -94,6 +94,7 @@ function YourMainContent({ themeColor }: { themeColor: string }) {
       ],
     },
   });
+
   const { agent } = useAgent({ agentId: name });
 
   //🪁 Generative UI: https://docs.copilotkit.ai/mastra/generative-ui/tool-based
