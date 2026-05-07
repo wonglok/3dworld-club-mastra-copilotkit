@@ -13,7 +13,7 @@ const deepseekProvider = createDeepSeek({
   apiKey: process.env.DEEPSEEK_API_KEY ?? "",
 });
 
-let deepSeekChatModel = deepseekProvider.languageModel("deepseek-chat");
+let deepSeekChatModel = deepseekProvider.languageModel("deepseek-v4-flash");
 
 let lmStudioModel = createOpenAICompatible({
   baseURL: "http://localhost:1234/v1",
