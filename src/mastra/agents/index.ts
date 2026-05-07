@@ -1,7 +1,7 @@
 // import { openai } from "@ai-sdk/openai";
 import { Agent } from "@mastra/core/agent";
 import { weatherTool } from "@/mastra/tools";
-import { LibSQLStore } from "@mastra/libsql";
+// import { LibSQLStore } from "@mastra/libsql";
 import { z } from "zod";
 import { Memory } from "@mastra/memory";
 import { createOpenAICompatible } from "@ai-sdk/openai-compatible";
@@ -30,18 +30,22 @@ export const AgentState = z.object({
   proverbs: z.array(z.string()).default([]),
 
   //
-  recepie: z
-    .object({
-      ingredients: z.array(
-        z.object({
-          name: z.string(),
-          emoji: z.string(),
-        }),
-      ),
-      instructions: z.array(z.object({ step: z.string() })),
-    })
-    .optional(),
+  // recepie: z
+  //   .object({
+  //     ingredients: z.array(
+  //       z.object({
+  //         name: z.string(),
+  //         emoji: z.string(),
+  //       }),
+  //     ),
+  //     instructions: z.array(z.object({ step: z.string() })),
+  //   })
+  //   .optional(),
 });
+
+export const initData = {
+  //
+};
 
 export type AgentStateType = z.infer<typeof AgentState>;
 
@@ -49,9 +53,12 @@ export const myAgentCopilot = new Agent({
   id: "myAgentCopilot",
   name: "myAgentCopilot",
   tools: { weatherTool },
-  model: deepSeekChatModel,
+  model:
+    // deepSeekChatModel,
+    process.env.NODE_ENV === "development" ? lmStudioModel : deepSeekChatModel,
 
-  // process.env.NODE_ENV === "development" ? lmStudioModel : deepSeekChatModel,
+  //
+
   instructions: "You are a helpful assistant.",
   memory: new Memory({
     // storage: new LibSQLStore({

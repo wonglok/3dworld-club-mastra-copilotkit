@@ -100,8 +100,6 @@ function YourMainContent({ themeColor }: { themeColor: string }) {
     },
   });
 
-  const { agent } = useAgent({ agentId: name });
-
   //🪁 Generative UI: https://docs.copilotkit.ai/mastra/generative-ui/tool-based
   useCopilotAction(
     {
@@ -145,7 +143,7 @@ function YourMainContent({ themeColor }: { themeColor: string }) {
       style={{ backgroundColor: themeColor }}
       className="h-screen flex justify-center items-center flex-col transition-colors duration-300"
     >
-      <ProverbsCard state={state} setState={setState} agent={agent} />
+      <ProverbsCard state={state} setState={setState} name={name} />
     </div>
   );
 }

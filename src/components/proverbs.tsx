@@ -1,18 +1,20 @@
 import { AgentStateType } from "@/mastra/agents";
-import { AbstractAgent } from "@ag-ui/client";
+import { useAgent } from "@copilotkit/react-core/v2";
 // import { useCopilotChat } from "@copilotkit/react-core";
 // import { useCopilotKit } from "@copilotkit/react-core/v2";
 import { useChatContext } from "@copilotkit/react-ui";
-import { useState } from "react";
+// import { useState } from "react";
+// import { AbstractAgent } from "@ag-ui/client";
 
 export interface ProverbsCardProps {
   state: AgentStateType;
   setState: (state: AgentStateType) => void;
-  agent?: AbstractAgent;
+  name: string;
 }
 
-export function ProverbsCard({ state, setState, agent }: ProverbsCardProps) {
+export function ProverbsCard({ state, setState, name }: ProverbsCardProps) {
   const chat = useChatContext();
+  const { agent } = useAgent({ agentId: name });
 
   return (
     <div className="bg-white/20 backdrop-blur-md p-8 rounded-2xl shadow-xl max-w-2xl w-full">
