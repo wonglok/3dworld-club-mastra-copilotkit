@@ -7,8 +7,8 @@ if (!process.env.MONGODB_DATABASE) {
   throw new Error("need process.env.MONGODB_DATABASE");
 }
 
-export const mastraStorage = new MongoDBStore({
-  id: "mastra-storage",
+export const recepieStorage = new MongoDBStore({
+  id: "recepie-storage",
   uri: process.env.MONGODB_URI,
   dbName: process.env.MONGODB_DATABASE_MASTRA || "",
 });
