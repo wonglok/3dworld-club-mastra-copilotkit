@@ -17,6 +17,7 @@ export const POST = async (req: NextRequest) => {
   const runtime = new CopilotRuntime({
     // @ts-expect-error - ignore for now, typing error
     agents: MastraAgent.getLocalAgents({ mastra }),
+    // agents: { default: agent },
   });
 
   const { handleRequest } = copilotRuntimeNextJSAppRouterEndpoint({
