@@ -26,11 +26,15 @@
     "@mastra/memory": "beta",
     "@mastra/mongodb": "^1.7.3",
     "@mastra/upstash": "^1.1.0",
+    "@react-three/drei": "^10.7.7",
+    "@react-three/fiber": "^9.6.1",
+    "@types/three": "^0.184.1",
     "libsql": "^0.5.22",
     "mastra": "beta",
     "next": "16.1.2",
     "react": "^19.2.1",
     "react-dom": "^19.2.1",
+    "three": "^0.184.0",
     "zod": "^3.25.0"
   },
   "devDependencies": {

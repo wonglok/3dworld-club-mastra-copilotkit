@@ -93,10 +93,7 @@ function YourMainContent({ themeColor }: { themeColor: string }) {
   const { state, setState, name } = useCoAgent<AgentStateType>({
     name: "myAgentCopilot",
     initialState: {
-      proverbs: [
-        "CopilotKit may be new, but its the best thing since sliced bread.",
-        "An Apple a day, my money flys away.",
-      ],
+      proverbs: [],
     },
   });
 

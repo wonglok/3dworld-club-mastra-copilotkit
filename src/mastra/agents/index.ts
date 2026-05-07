@@ -27,7 +27,15 @@ let lmStudioModel = createOpenAICompatible({
 });
 
 export const AgentState = z.object({
-  proverbs: z.array(z.string()).default([]),
+  proverbs: z
+    .array(
+      z.object({
+        slug: z.string(),
+        verse: z.string(),
+        text: z.string(),
+      }),
+    )
+    .default([]),
 
   //
   // recepie: z
