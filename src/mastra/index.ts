@@ -14,9 +14,6 @@ export const mastra = new Mastra({
     id: "mastra-storage",
     url: ":memory:",
   }),
-  /*
- 
-  */
   logger: new ConsoleLogger({
     level: LOG_LEVEL,
   }),
