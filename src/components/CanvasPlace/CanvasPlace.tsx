@@ -15,7 +15,11 @@ declare module "@react-three/fiber" {
 
 extend(THREE as any);
 
-export function CanvasPlace({ children }: { children?: ReactNode[] }) {
+export function CanvasPlace({
+  children,
+}: {
+  children?: ReactNode[] | ReactNode;
+}) {
   return (
     <Canvas
       gl={async (props) => {

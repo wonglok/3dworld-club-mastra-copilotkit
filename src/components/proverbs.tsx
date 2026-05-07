@@ -4,6 +4,7 @@ import { useAgent } from "@copilotkit/react-core/v2";
 // import { useCopilotKit } from "@copilotkit/react-core/v2";
 import { useChatContext } from "@copilotkit/react-ui";
 import { CanvasPlace } from "./CanvasPlace/CanvasPlace";
+import { My3DSpace } from "./My3DSpace/My3DSpace";
 // import { useState } from "react";
 // import { AbstractAgent } from "@ag-ui/client";
 
@@ -30,7 +31,9 @@ export function ProverbsCard({ state, setState, name }: ProverbsCardProps) {
         <div className="h-full overflow-scroll">
           <>
             <div className="h-[500px]">
-              <CanvasPlace></CanvasPlace>
+              <CanvasPlace>
+                <My3DSpace></My3DSpace>
+              </CanvasPlace>
             </div>
           </>
 
