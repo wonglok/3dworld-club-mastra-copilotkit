@@ -29,10 +29,6 @@ export function CanvasPlace({
       }}
     >
       {children}
-      <mesh>
-        <meshBasicNodeMaterial />
-        <boxGeometry />
-      </mesh>
     </Canvas>
   );
 }

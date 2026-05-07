@@ -5,18 +5,43 @@ import { useAgent } from "@copilotkit/react-core/v2";
 import { useChatContext } from "@copilotkit/react-ui";
 import { CanvasPlace } from "./CanvasPlace/CanvasPlace";
 import { My3DSpace } from "./My3DSpace/My3DSpace";
+import { Suspense } from "react";
 // import { useState } from "react";
 // import { AbstractAgent } from "@ag-ui/client";
 
 export interface ProverbsCardProps {
   state: AgentStateType;
   setState: (state: AgentStateType) => void;
-  name: string;
+  agent: any;
 }
 
-export function ProverbsCard({ state, setState, name }: ProverbsCardProps) {
-  const chat = useChatContext();
+export const ProverbsCard = ({
+  name,
+  state,
+  setState,
+}: {
+  state: AgentStateType;
+  setState: (state: AgentStateType) => void;
+  name: string;
+}) => {
   const { agent } = useAgent({ agentId: name });
+
+  return (
+    <>
+      <ProverbsCardCore
+        state={state}
+        agent={agent}
+        setState={setState}
+      ></ProverbsCardCore>
+    </>
+  );
+};
+export function ProverbsCardCore({
+  state,
+  setState,
+  agent,
+}: ProverbsCardProps) {
+  const chat = useChatContext();
 
   return (
     <div className="bg-white/20 backdrop-blur-md p-8 rounded-2xl shadow-xl max-w-2xl w-full">
@@ -31,9 +56,11 @@ export function ProverbsCard({ state, setState, name }: ProverbsCardProps) {
         <div className="h-full overflow-scroll">
           <>
             <div className="h-[500px]">
-              <CanvasPlace>
-                <My3DSpace></My3DSpace>
-              </CanvasPlace>
+              {/* <CanvasPlace>
+                <Suspense fallback={null}>
+                  <My3DSpace></My3DSpace>
+                </Suspense>
+              </CanvasPlace> */}
             </div>
           </>
 
