@@ -7,7 +7,7 @@ import { useCoAgent, useCopilotAction } from "@copilotkit/react-core";
 import { CopilotKitCSSProperties, CopilotSidebar } from "@copilotkit/react-ui";
 import { useState } from "react";
 import { AgentStateType } from "@/mastra/agents";
-import { useAgent } from "@copilotkit/react-core/v2";
+// import { useAgent } from "@copilotkit/react-core/v2";
 
 export default function CopilotKitPage() {
   const [themeColor, setThemeColor] = useState("#6366f1");
@@ -35,8 +35,8 @@ export default function CopilotKitPage() {
       }
     >
       <CopilotSidebar
-        defaultOpen
-        disableSystemMessage={true}
+        defaultOpen={false}
+        disableSystemMessage={false}
         clickOutsideToClose={false}
         onSubmitMessage={(message) => {
           //
