@@ -22,11 +22,9 @@ export const POST = async (req: NextRequest) => {
 
   const { handleRequest } = copilotRuntimeNextJSAppRouterEndpoint({
     runtime: runtime,
-    // serviceAdapter: serviceAdapter,
+    serviceAdapter: serviceAdapter,
     endpoint: "/api/copilotkit",
   });
-
-  //
 
   return handleRequest(req);
 };

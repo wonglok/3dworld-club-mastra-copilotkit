@@ -26,6 +26,21 @@ let lmStudioModel = createOpenAICompatible({
   provider: "openai",
 });
 
+export const MyObjectSchema = z.discriminatedUnion("type", [
+  z.object({
+    type: z.literal("apple"),
+    slug: z.string(),
+    displayName: z.string(),
+    describe: z.string(),
+  }),
+  z.object({
+    type: z.literal("orange"),
+    slug: z.string(),
+    displayName: z.string(),
+    describe: z.string(),
+  }),
+]);
+
 export const AgentState = z.object({
   proverbs: z
     .array(
@@ -37,18 +52,7 @@ export const AgentState = z.object({
     )
     .default([]),
 
-  //
-  // recepie: z
-  //   .object({
-  //     ingredients: z.array(
-  //       z.object({
-  //         name: z.string(),
-  //         emoji: z.string(),
-  //       }),
-  //     ),
-  //     instructions: z.array(z.object({ step: z.string() })),
-  //   })
-  //   .optional(),
+  objects: z.array(MyObjectSchema),
 });
 
 export const initData = {
